@@ -1,0 +1,108 @@
+html
+{
+	font-family: sans-serif;
+}
+
+html, body
+{
+	padding: 0;
+	margin: 0;
+}
+
+body
+{
+	background-color: #fff;
+}
+
+.site-header > *, .site-content, .site-footer > *
+{
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 0.5rem 1rem;
+}
+
+.site-header, .site-footer
+{
+	background-color: #27272a;
+	color: #fff;
+}
+
+.site-header a
+{
+	color: #fff;
+}
+
+.site-header nav h2
+{
+	display: none;
+}
+
+.site-header, .site-footer
+{
+	text-transform: lowercase;
+}
+
+
+/* Breadcrumb navigation */
+.breadcrumb
+{
+	display: flex;
+	flex-wrap: wrap;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.breadcrumb li
+{
+}
+
+.breadcrumb li:not(:last-child)
+{
+	font-weight: 400;
+}
+
+.breadcrumb li:last-child
+{
+	font-weight: 600;
+}
+
+.breadcrumb li:not(:first-child)::before
+{
+	content: ">";
+	padding: 0 0.5em;
+}
+
+.breadcrumb li a
+{
+}
+
+.breadcrumb li a:hover
+{
+}
+
+dl dt
+{
+	font-weight: 600;
+}
+
+dl dt::after
+{
+	content: ":"
+}
+
+article header
+{
+	border-bottom: 1px solid black;
+}
+
+article footer
+{
+	border-top: 1px solid black;
+}
+
+.toc
+{
+	background-color: #eee;
+	padding: 0 1em;
+}
