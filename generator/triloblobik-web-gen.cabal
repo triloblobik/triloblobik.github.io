@@ -1,0 +1,21 @@
+cabal-version:      3.0
+name:               triloblobik-web-gen
+version:            0.1.0.0
+synopsis:           Generator of triloblobik's website
+-- description:
+homepage:           triloblobik.github.io
+bug-reports:        https://github.com/triloblobik/triloblobik.github.io/issues
+license:            NONE
+author:             triloblobik
+maintainer:         triloblobik@proton.me
+copyright:          (c) 2023 triloblobik
+category:           Web
+extra-source-files: CHANGELOG.md
+
+executable triloblobik-web-gen
+    main-is:          Main.hs
+    -- other-modules:
+    -- other-extensions:
+    build-depends:    base ^>=4.17.2.0
+    hs-source-dirs:   app
+    default-language: Haskell2010
