@@ -11,98 +11,10 @@
 	<body>
 		<header class="site-header">
 			<h1>Triloblobik's Website</h1>
-			<nav>
-				<h2>Breadcrumb navigation</h2>
-
-				<ol class="breadcrumb">
-					<li><a href="#">Home</a></li>
-					<li><a href="#">Category</a></li>
-					<li><a href="#">Subcategory</a></li>
-					<li>About this website</li>
-				</ol>
-			</nav>
 		</header>
 
 		<main class="site-content">
-			<article>
-				<header>
-					<h2>About this website</h2>
-
-					<details class="toc" open="">
-						<summary>Table of contents</summary>
-
-						<ol>
-							<li><a href="#introduction">Introduction</a></li>
-							<li>
-								<a href="#site-language">Site language</a>
-
-								<ol>
-									<li>HTML</li>
-									<li>Markdown</li>
-								</ol>
-							</li>
-							<li>&hellip;</li>
-						</ol>
-					</details>
-				</header>
-
-				<section id="introduction">
-					<h2>Introduction</h2>
-
-					<p>This page describes the initial phase of development of this website and the decisions made. I created this website to share some interesting or useful parts of my knowledge with others.</p>
-				</section>
-
-				<section id="site-language">
-					<h2>Site language</h2>
-
-					<p>At first, I was thinking about writing this website using a lightweight markup language like Markdown or AsciiDoc, which are commonly used nowadays, especially in source code repositories on GitHub or GitLab services which automatically render them to their output HTML form. Their syntax is however extremely limiting compared to pure HTML, at least in Markdown. You <em>can</em> use HTML inside them, but, in my opinion, mixing the two completely different languages / syntaxes looks and feels ugly and wrong. Oftentimes, when writing Markdown, I need to create a definition list or a numbered list that contains multiple elements, incl. a code block, and the default options are, to my knowledge, so limited I end up using <code>&lt;table&gt;</code> or <code>&lt;ol&gt;</code> for purely presentation reasons. At least, HTML syntax allows some tags, e.g. <code>&lt;li&gt;</code>, to be unterminated, which helps it to fit more seamlessly into Markdown.</p>
-
-					<p>The only reason against manual HTML is its handling of whitespace. It forces a not-so-pretty syntax for embedding code blocks inside <code>&lt;pre&gt;</code> where all whitespace (even indentation) matters. You can use CSS to trim all leading whitespace. There are also other places where whitespace between tags is undesirable and might cause an unwanted space in the rendered output.</p>
-
-					<p>Overall, I decided to write the website manually in HTML, preferably the semantic flavor, for all my content. I decided not to conform to the XML syntax because it only allows the <code>&amp;lt;</code>, <code>&amp;gt;</code>, <code>&amp;amp;</code>, <code>&amp;quot;</code>, and <code>&amp;apos;</code> entity references to be used safely. As I don't like generic unicode characters outside ASCII in my source codes and the character references (such as <code>&amp;#169;</code>) are not descriptive enough, this limitation is quite serious for me.</p>
-
-					<p>Maybe you expected to learn about my choice of a natural language in this section. As you may have noticed, and probably did, I'm not a native English speaker. However, as you may know, English is the lingua franca of technology, therefore, it has many positives to write in English. I remember one man criticizing me for not writing comments in my code, saying that code comments in imperfect English are way better than no comments at all. I hope this also scales up to this whole website; I hope this website will be helpful to someone.</p>
-				</section>
-
-				<section id="site-generation">
-					<h2>Site generation</h2>
-
-					<p>As writing all HTML files on this website completely manually and copy-pasting common parts of the files would be quite error-prone, I knew I needed some kind of generator or templating system. There are several options&hellip; (TODO)</p>
-				</section>
-
-				<section id="resources-tools">
-					<h2>Web development resources and tools</h2>
-
-					<p>TODO&hellip;</p>
-				</section>
-
-				<section id="breadcrumb-nav">
-					<h2>Breadcrumb navigation</h2>
-
-					<p>TODO&hellip;</p>
-				</section>
-
-				<section id="dl-format">
-					<h2>Description list format</h2>
-
-					<p>At first, I prefered a <code>&lt;dt&gt;</code> and the corresponding <code>&lt;dd&gt;</code> to be rendered on the same line, in a grid-like view. CSS properties <code>display: grid;</code> and <code>grid-template-columns: max-content auto</code> were perfect for that. I also included <code>grid-column-start</code> for its ability to correctly render a scenario where <code>dt</code> and <code>dd</code> elements were not in a one-to-one relationship. On small screens, however, I would probably need to set an override to collapse the grid into one column not to overflow to the right. As I don't want to maintain any screen-size-based rules, I decided not to use the grid at all.</p>
-
-					<p>There is, however, a problem with <code>max-content</code> as the first column may become too wide on small screens.</p>
-				</section>
-
-				<footer>
-					<dl class="article-info">
-						<div>
-							<dt>Created</dt>
-							<dd>2023-10-24</dd>
-						</div>
-						<div>
-							<dt>Last modified</dt>
-							<dd>2023-11-01</dd>
-						</div>
-					</dl>
-				</footer>
-			</article>
+			<p>Go and see my <a href="about.html">about</a> page.</p>
 		</main>
 
 		<footer class="site-footer">
