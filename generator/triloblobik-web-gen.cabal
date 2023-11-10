@@ -3,7 +3,7 @@ name:               triloblobik-web-gen
 version:            0.1.0.0
 synopsis:           Generator of triloblobik's website
 -- description:
-homepage:           triloblobik.github.io
+homepage:           https://triloblobik.github.io/about.html
 bug-reports:        https://github.com/triloblobik/triloblobik.github.io/issues
 license:            NONE
 author:             triloblobik
