@@ -37,6 +37,12 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v3
 
+      - name: Setup Haskell
+        uses: haskell-actions/setup@v2
+        with:
+          ghc-version: '9.4'
+          cabal-version: '3.6'
+
       - name: Build result
         run: ./build.sh
 
