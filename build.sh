@@ -2,8 +2,12 @@
 set -e
 cd -- "$(dirname -- "$0")"
 
-rm -rf result
+OUTDIR=_build
 
-mkdir -p result
-cp -r static result/
-cp -r articles/. result/
+rm -rf -- "${OUTDIR}"
+
+mkdir -p -- "${OUTDIR}"
+cp -r static  -- "${OUTDIR}"/
+
+cd generator
+cabal run
