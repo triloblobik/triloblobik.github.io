@@ -4,10 +4,10 @@ import Data.ByteString.Lazy.Char8
 import System.Directory.Tree
 import Prelude hiding (readFile, writeFile)
 
--- TODO: learn about a better way
+-- TODO: learn a better way
 modifyTree :: AnchoredDirTree a -> AnchoredDirTree a
-modifyTree (".." :/ Dir "articles" contents) = ".." :/ Dir "_build" contents
+modifyTree (".." :/ Dir "content" contents) = ".." :/ Dir "_build" contents
 
--- TODO: understand
+-- TODO: understand monads
 main :: IO ()
-main = readDirectoryWithL readFile "../articles/" >>= writeDirectoryWith writeFile . modifyTree >> pure ()
+main = readDirectoryWithL readFile "../content/" >>= writeDirectoryWith writeFile . modifyTree >> pure ()
