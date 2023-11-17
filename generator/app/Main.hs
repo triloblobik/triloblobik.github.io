@@ -1,14 +1,13 @@
 module Main (main) where
 
-import Control.Monad (void)
 import Data.ByteString.Lazy.Char8
+import Generator (generateSite)
 import System.Directory.Tree
 import Prelude hiding (readFile, writeFile)
 
-modifyTree :: DirTree a -> DirTree a
-modifyTree = id -- TODO: do something useful
-
 main :: IO ()
-main =
-  readDirectoryWithL readFile "../content/./" >>= \sourceTree ->
-    (void . writeDirectoryWith writeFile) ("../_build" :/ modifyTree (dirTree sourceTree))
+main = do
+  contents <- dirTree <$> readDirectoryWithL readFile "../content/./"
+  templates <- dirTree <$> readDirectoryWithL readFile "../templates/./"
+  writeDirectoryWith writeFile ("../_build" :/ generateSite templates contents)
+  pure ()
