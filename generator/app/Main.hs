@@ -1,13 +1,14 @@
 module Main (main) where
 
+import Control.Monad (void)
 import Data.ByteString.Lazy.Char8
 import System.Directory.Tree
 import Prelude hiding (readFile, writeFile)
 
--- TODO: learn a better way
-modifyTree :: AnchoredDirTree a -> AnchoredDirTree a
-modifyTree (".." :/ Dir "content" contents) = ".." :/ Dir "_build" contents
+modifyTree :: DirTree a -> DirTree a
+modifyTree = id -- TODO: do something useful
 
--- TODO: understand monads
 main :: IO ()
-main = readDirectoryWithL readFile "../content/" >>= writeDirectoryWith writeFile . modifyTree >> pure ()
+main =
+  readDirectoryWithL readFile "../content/./" >>= \sourceTree ->
+    (void . writeDirectoryWith writeFile) ("../_build" :/ modifyTree (dirTree sourceTree))
