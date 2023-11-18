@@ -14,11 +14,12 @@ extra-source-files: CHANGELOG.md
 
 executable triloblobik-web-gen
     main-is:            Main.hs
-    other-modules:      Generator
+    other-modules:      Article Generator Html
     -- other-extensions:
     build-depends:
         base            ^>=4.17.2.0,
         bytestring      ^>=0.12.0.2,
+        containers      ^>=0.6.7,
         directory-tree  ^>=0.12.1,
         utf8-string     ^>=1.0.2,
     hs-source-dirs:   app

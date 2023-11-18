@@ -1,13 +1,25 @@
 module Generator (generateSite) where
 
-import Data.ByteString.Lazy.Char8 hiding (map)
+import qualified Data.ByteString.Lazy.Char8 as BCL
 import Data.ByteString.Lazy.UTF8 (fromString)
+import Data.Sequence
 import System.Directory.Tree
 
---              template sources      contents sources      result directory
-generateSite :: DirTree ByteString -> DirTree ByteString -> DirTree ByteString
+traverseWithPathImpl :: Seq FileName -> (Seq FileName -> a -> b) -> DirTree a -> DirTree b
+traverseWithPathImpl pathAcc fn dirTree =
+  case dirTree of
+    Dir name contents ->
+      Dir name $ map (traverseWithPathImpl (pathAcc :|> name) fn) contents
+    File name contents ->
+      File name $ fn (pathAcc :|> name) contents
+
+traverseWithPath :: (Seq FileName -> a -> b) -> DirTree a -> DirTree b
+traverseWithPath = traverseWithPathImpl Empty
+
+--              template sources            contents sources            result sources
+generateSite :: [DirTree BCL.ByteString] -> [DirTree BCL.ByteString] -> [DirTree BCL.ByteString]
 generateSite templates contents =
-  case contents of
-    Dir name contents -> Dir name (map (generateSite templates) contents)
-    File "about.html" contents -> File "about.html" (fromString "sample content")
-    File name contents -> File name contents
+  map (traverseWithPath fn) contents
+  where
+    fn (Empty :|> "articles" :|> "about.html") y = fromString "HAHA"
+    fn x y = y
