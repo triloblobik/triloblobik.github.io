@@ -1,56 +1,45 @@
-type: article
-title: About this website
-description: Article about various decisions that went into creating this website.
-creation_date: 2023-10-24
-modification_date: 2023-11-03
----
+<!-- TODO: think of a better file extension than '.html' -->
 
-<section id="introduction">
-	<h2>Introduction</h2>
+%metadata
+	template article
+	title About this website
+	description Article about various decisions that went into creating this website.
+	creation_date 2023-10-24
+	modification_date 2023-11-25
 
-	<p>This page describes the initial phase of development of this website and the decisions made. I created this website to share some interesting or useful pieces of my knowledge with others.</p>
-</section>
 
-<section id="site-language">
-	<h2>Site language</h2>
+section#introduction
+	h Introduction
+	p This page describes the initial phase of development of this website and the decisions made. I created this website to share some interesting or useful pieces of my knowledge with others.
 
-	<p>At first, I was thinking about writing this website using a lightweight markup language like Markdown or AsciiDoc, which are commonly used nowadays, especially in source code repositories on GitHub or GitLab services which automatically render them to their output HTML form. Their syntax is however extremely limiting compared to pure HTML, at least in Markdown. You <em>can</em> use HTML inside them, but, in my opinion, mixing the two completely different languages/syntaxes looks and feels ugly and wrong. Oftentimes, when writing Markdown, I need to create a definition list or a numbered list that contains multiple elements, incl. a code block, and the default options are, to my knowledge, so limited I end up using <code>&lt;table&gt;</code> or <code>&lt;ol&gt;</code> for purely presentation reasons. At least, HTML syntax allows some tags, e.g. <code>&lt;li&gt;</code>, to be unterminated, which helps it to fit more seamlessly into Markdown.</p>
+section#site-language
+	h Site language
+	p At first, I was thinking about writing this website using a lightweight markup language like Markdown or AsciiDoc, which are commonly used nowadays, especially in source code repositories on GitHub or GitLab services which automatically render them to their output HTML form. Their syntax is however extremely limiting compared to pure HTML, at least in Markdown. You `em can` use HTML inside them, but, in my opinion, mixing the two completely different languages/syntaxes looks and feels ugly and wrong. Oftentimes, when writing Markdown, I need to create a definition list or a numbered list that contains multiple elements, incl. a code block, and the default options are, to my knowledge, so limited I end up using `code <table>` or `code <ol>` for purely presentation reasons. At least, HTML syntax allows some tags, e.g. `code <li>`, to be unterminated, which helps it to fit more seamlessly into Markdown.
+	p The only reason against manual HTML is its handling of whitespace. It forces a not-so-pretty syntax for embedding code blocks inside `code <pre>` where all whitespace (even indentation) matters. You can use CSS to trim all leading whitespace. There are also other places where whitespace between tags is undesirable and might cause an unwanted space in the rendered output.
+	p Overall, I decided to write the website manually in HTML, preferably the semantic flavor, for all my content. I decided not to conform to the XML syntax because it only allows the `code &amp;lt;`, `code &amp;gt;`, `code &amp;amp;`, `code &amp;quot;`, and `code &amp;apos;` entity references to be used safely. As I don't like generic unicode characters outside ASCII in my source codes and the character references (such as `code &amp;#169;`) are not descriptive enough, this limitation is quite serious for me.
 
-	<p>The only reason against manual HTML is its handling of whitespace. It forces a not-so-pretty syntax for embedding code blocks inside <code>&lt;pre&gt;</code> where all whitespace (even indentation) matters. You can use CSS to trim all leading whitespace. There are also other places where whitespace between tags is undesirable and might cause an unwanted space in the rendered output.</p>
+	<!-- TODO: Decide on the comment syntax -- maybe there will be two types of comments; one for me as a writer (removed at "compile-time") and one for the readers (preserved in the generated output as regular HTML comments) -->
+	<!-- TODO: Keep the link up-to-date -->
+	p After a bit of writing, I decided to simplify the HTML syntax a bit to reduce redundant code. You can check the source code of this page on `a[href="https://github.com/triloblobik/triloblobik.github.io/blob/experimental/content/articles/about.html"] GitHub` to see the, in my opinion, better syntax that relies on indentation levels heavily. Just to demonstrate something, even `b.even#with inline `i[title="attributes"].classes#and-ids scope nesting`` is supported (uses whitespace to differentiate between the starting and ending backtick). Even better, I don't have to keep track of the section heading level manually with the `code h1`, `code h2`, etc., elements as I can just write the equivalent of the XHTML 2.0 `code h` element and the site generator will replace it with the proper heading element. Then, I can focus less on doing the numbering manually and more on writing actual content, as is the ideal goal of the modern, semantic HTML, although it is restricted by backwards compatibility to some degree.
 
-	<p>Overall, I decided to write the website manually in HTML, preferably the semantic flavor, for all my content. I decided not to conform to the XML syntax because it only allows the <code>&amp;lt;</code>, <code>&amp;gt;</code>, <code>&amp;amp;</code>, <code>&amp;quot;</code>, and <code>&amp;apos;</code> entity references to be used safely. As I don't like generic unicode characters outside ASCII in my source codes and the character references (such as <code>&amp;#169;</code>) are not descriptive enough, this limitation is quite serious for me.</p>
+	p Maybe you expected to learn about my choice of a natural language in this section. As you may have noticed, and probably did, I'm not a native English speaker. However, as you may know, English is the lingua franca of technology, therefore, it has many positives to write in English. I remember one man criticizing me for not writing comments in my code, saying that code comments in imperfect English are way better than no comments at all. I hope this also scales up to this whole website; I hope this website will be helpful to someone. I might also consider using Grammarly to fix my errors and sound more natural.
 
-	<p>Maybe you expected to learn about my choice of a natural language in this section. As you may have noticed, and probably did, I'm not a native English speaker. However, as you may know, English is the lingua franca of technology, therefore, it has many positives to write in English. I remember one man criticizing me for not writing comments in my code, saying that code comments in imperfect English are way better than no comments at all. I hope this also scales up to this whole website; I hope this website will be helpful to someone. I might also consider using Grammarly to fix my errors and sound more natural.</p>
-</section>
+section#site-generation
+	h Site generation
+	p As writing all HTML files on this website completely manually and copy-pasting common parts of the files would be quite error-prone, I knew I needed some kind of generator or templating system. And when I decided to use a custom HTML syntax, the decision was undoubted. There are many options.
+	p At first, I was thinking about a solution using basic bash scripts and classic UNIX tools. Then, I thought Python might be a better alternative. After trying these, I knew I needed something statically typed and preferably immutable. I considered C, C++, Rust and Haskell.
+	p I was familiar with C and a bit with C++. With C, I would have to implement almost everything from scratch, and C++ can be tricky at times. I was totally unfamiliar with both Rust and Haskell. I knew I had Rust on my to-learn list, but I've finally chosen Haskell as my generator language as it's arguably less controversial than Rust and, unlike Rust, I will likely never need Haskell in my professional life, so it's not a problem if I develop some bad habits in writing it. Also, it has some cool features other languages lack (most of which I will probably never really understand).
+	p On the other hand, Haskell seems like an overkill for such a project. And it has some features I don't like, such as the convention of using camelCase instead of snake_case in function names and PascalCase in filenames. It makes sense in combination with the convention of naming other things, however, so I'm okay with it. Also, it has the disadvantage of being too focused on functional programming and somewhat neglecting object-oriented features, compared to, e.g., Scala, which, in turn, has other problems.
 
-<section id="site-generation">
-	<h2>Site generation</h2>
+section#resources-tools
+	h Web development resources and tools
+	p TODO&hellip;
 
-	<p>As writing all HTML files on this website completely manually and copy-pasting common parts of the files would be quite error-prone, I knew I needed some kind of generator or templating system. There are many options.</p>
+section#breadcrumb-nav
+	h Breadcrumb navigation
+	p TODO&hellip;
 
-	<p>At first, I was thinking about a solution using basic bash scripts and classic UNIX tools. Then, I thought Python might be a better alternative. After trying these, I knew I needed something statically typed and preferably immutable. I considered C, C++, Rust and Haskell.</p>
-
-	<p>I was familiar with C and a bit with C++. With C, I would have to implement almost everything from scratch, and C++ might be tricky at times. I was totally unfamiliar with Rust and Haskell. I knew I had Rust on my to-learn list. I've finally chosen Haskell as my generator language as it's less controversial than Rust and, unlike Rust, I will likely never need Haskell in my professional life, so it's not a problem if I develop some bad habits in writing it. Also, it has some cool features other languages lack (most of which I will probably never really understand).</p>
-
-	<p>On the other hand, Haskell seems like an overkill for such a project. And it has some features I don't like, such as the convention of using camelCase instead of snake_case in function names and PascalCase in filenames. It makes sense in combination with the convention of naming other things, however, so I'm okay with it. Also, it has the disadvantage of being too focused on functional programming and somewhat neglecting object-oriented features, compared to, e.g., Scala, which, in turn, has other problems.</p>
-</section>
-
-<section id="resources-tools">
-	<h2>Web development resources and tools</h2>
-
-	<p>TODO&hellip;</p>
-</section>
-
-<section id="breadcrumb-nav">
-	<h2>Breadcrumb navigation</h2>
-
-	<p>TODO&hellip;</p>
-</section>
-
-<section id="dl-format">
-	<h2>Description list format</h2>
-
-	<p>At first, I prefered a <code>&lt;dt&gt;</code> and the corresponding <code>&lt;dd&gt;</code> to be rendered on the same line, in a grid-like view. CSS properties <code>display: grid;</code> and <code>grid-template-columns: max-content auto</code> were perfect for that. I also included <code>grid-column-start</code> for its ability to correctly render a scenario where <code>dt</code> and <code>dd</code> elements were not in a one-to-one relationship. On small screens, however, I would probably need to set an override to collapse the grid into one column not to overflow to the right. As I don't want to maintain any screen-size-based rules, I decided not to use the grid at all.</p>
-
-	<p>There is, however, a problem with <code>max-content</code> as the first column may become too wide on small screens.</p>
-</section>
+section#dl-format
+	h Description list format
+	p At first, I prefered a `code <dt>` and the corresponding `code <dd>` to be rendered on the same line, in a grid-like view. CSS properties `code display: grid;` and `code grid-template-columns: max-content auto` were perfect for that. I also included `code grid-column-start` for its ability to correctly render a scenario where `code dt` and `code dd` elements were not in a one-to-one relationship. On small screens, however, I would probably need to set an override to collapse the grid into one column not to overflow to the right. As I don't want to maintain any screen-size-based rules, I decided not to use the grid at all.
+	p There is, however, a problem with `code max-content` as the first column may become too wide on small screens.
